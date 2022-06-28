@@ -33,10 +33,10 @@ class Order
 
   def choose_order
     user_input = nil
-    puts "Welcome to the Brazilian Restaurant"
-    puts "Please write the item you'd like to order:"
+    puts "\nWelcome to the Brazilian Restaurant"
+    puts "\nPlease write the item you'd like to order:"
     format(@menu)
-    puts "For checkout, press 0"
+    puts "\nFor checkout, press 0"
     # The user can add other items and when they finishes, they press 0.
     # chosen_items is a array with keys
     while user_input != "0" do
@@ -54,10 +54,10 @@ class Order
   end
 
   def checkout
-    puts "Your order:"
+    puts "\nYour order:"
     format(@chosen_items_with_price)
     total
-    puts "Press 1 to confirm, 2 to delete or 3 to add"
+    puts "\nPress 1 to confirm, 2 to delete or 3 to add"
     user_input = @order.gets.chomp
     case user_input
     when "1"
@@ -86,6 +86,8 @@ class Order
   end
 
   def send_sms
+    puts "\nThank you for your order!"
+    puts "Receive your order in 30 minutes or your money back"
     account_sid = "ACf344404d7e7ddf394343a8de6225b7b4"
     auth_token = "98b7f51f69fb444187db7a47f74dc9bc"
     @client = Twilio::REST::Client.new(account_sid, auth_token)
@@ -99,7 +101,7 @@ class Order
   end
 
   def delete
-    puts "Please write the item to delete:"
+    puts "\nPlease write the item to delete:\n"
     format(@chosen_items_with_price)
     user_input = @order.gets.chomp
     @chosen_items.delete(user_input)
@@ -108,5 +110,5 @@ class Order
   end
 end
 
-# order = Order.new(Kernel)
-# order.choose_order
+order = Order.new(Kernel)
+order.choose_order
