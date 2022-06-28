@@ -1,4 +1,6 @@
 # Welcome to the Brazilian Restaurant! 
+<img src="https://img.shields.io/badge/Twilio-F22F46?style=for-the-badge&logo=Twilio&logoColor=white"> <img src="https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white">
+
 You will receive a menu and choose which item you want to order.
 
 You can see your order, add more items or delete it. 
@@ -7,7 +9,7 @@ You can see the total, and you will receive a text message with the time to be d
 
 ***
 
-## Solo Project
+## Solo Project (From Makers) Golden Square
 
 > As a customer  
 > So that I can check if I want to order something  
