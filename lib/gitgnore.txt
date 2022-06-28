@@ -1,2 +1,0 @@
-account_sid = "ACf344404d7e7ddf394343a8de6225b7b4"
-auth_token = "5098372423290039acab873d6eff16e9"
