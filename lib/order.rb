@@ -1,10 +1,27 @@
+# Download the helper library from https://www.twilio.com/docs/ruby/install
+require 'rubygems'
+require 'twilio-ruby'
 
+# # Find your Account SID and Auth Token at twilio.com/console
+# # and set the environment variables. See http://twil.io/secure
+# account_sid = 
+# auth_token = 
+# @client = Twilio::REST::Client.new(account_sid, auth_token)
+
+# message = @client.messages
+#   .create(
+#      body: 'Thank you!'
+#      from: '+18599558642',
+#      to: '+44'
+#    )
+
+# puts message.sid
 
 class Order
   def initialize(order)
     @order = order
     @chosen_itens = []
-    @menu = {"Steak" => 14, "Feijoada" => 10, "Moqueca" => 12, "Cake" => 5, "Juice" => 5, "Caipirinha" => 6}
+    @menu = {"Steak" => 14, "Feijoada" => 10, "Moqueca" => 12, "Passion Fruit Cream" => 4, "Cake" => 5, "Brigadeiro" => 2, "Mango Juice" => 5, "Coffee" => 3, "Caipirinha" => 6}
     @chosen_itens_with_price = Hash.new
   end
 
@@ -60,8 +77,25 @@ class Order
     puts "\nTotal: £#{total_price.sum}"
   end
 
+  def time_format
+    @time = Time.now + 1800
+    @time.strftime("%k:%M")
+    # to add some time, this time should be in seconds.
+    # 30 minutes is the time to prepare the food and deliver it
+    # 30 min == 1800 sec
+  end
+
   def send_sms
-    puts "Thank you! Your order was placed and will be delivered before ..."
+    account_sid = "ACf344404d7e7ddf394343a8de6225b7b4"
+    auth_token = "98b7f51f69fb444187db7a47f74dc9bc"
+    @client = Twilio::REST::Client.new(account_sid, auth_token)
+    message = @client.messages
+      .create(
+        body: "Thank you! Your order was placed and will be delivered before #{time_format}",
+        from: '+18599558642',
+        to: '+447472956139'
+      )
+    puts message.sid
   end
 
   def delete
@@ -74,5 +108,5 @@ class Order
   end
 end
 
-# order = Order.new(Kernel)
-# order.choose_order
+order = Order.new(Kernel)
+order.choose_order
