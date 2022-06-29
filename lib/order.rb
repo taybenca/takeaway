@@ -23,6 +23,7 @@ class Order
     @chosen_items = []
     @menu = {"Steak" => 14, "Feijoada" => 10, "Moqueca" => 12, "Passion Fruit Cream" => 4, "Cake" => 5, "Brigadeiro" => 2, "Mango Juice" => 5, "Coffee" => 3, "Caipirinha" => 6}
     @chosen_items_with_price = Hash.new
+    puts "\nWelcome to the Brazilian Restaurant"
   end
 
   def format(hash)
@@ -33,7 +34,6 @@ class Order
 
   def choose_order
     user_input = nil
-    puts "\nWelcome to the Brazilian Restaurant"
     puts "\nPlease write the item you'd like to order:"
     format(@menu)
     puts "\nFor checkout, press 0"
@@ -44,7 +44,7 @@ class Order
       @chosen_items << user_input if @menu.include?(user_input)
     end
       # Now we need to find the value of each key listed an add in a new hash
-    @chosen_items.each do |item| 
+    @chosen_items.each do |item|
     @chosen_items_with_price.merge!(
       @menu.select do |key, value|
         key.include?(item)
