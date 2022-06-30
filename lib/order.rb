@@ -11,7 +11,7 @@ require 'twilio-ruby'
 # message = @client.messages
 #   .create(
 #      body: 'Thank you!'
-#      from: '+18599558642',
+#      from: '',
 #      to: '+44'
 #    )
 
@@ -20,7 +20,7 @@ require 'twilio-ruby'
 class Order
   def initialize(order)
     @order = order
-    @chosen_items = []
+    @chosen_items = Array.new
     @menu = {"Steak" => 14, "Feijoada" => 10, "Moqueca" => 12, "Passion Fruit Cream" => 4, "Cake" => 5, "Brigadeiro" => 2, "Mango Juice" => 5, "Coffee" => 3, "Caipirinha" => 6}
     @chosen_items_with_price = Hash.new
     puts "\nWelcome to the Brazilian Restaurant"
@@ -44,7 +44,7 @@ class Order
       @chosen_items << user_input if @menu.include?(user_input)
     end
       # Now we need to find the value of each key listed an add in a new hash
-    @chosen_items.each do |item|
+    @chosen_items.each do |item|  #["Feijoada", "Moqueca"]
     @chosen_items_with_price.merge!(
       @menu.select do |key, value|
         key.include?(item)
@@ -88,14 +88,14 @@ class Order
   def send_sms
     puts "\nThank you for your order!"
     puts "Receive your order in 30 minutes or your money back"
-    account_sid = "ACf344404d7e7ddf394343a8de6225b7b4"
-    auth_token = "98b7f51f69fb444187db7a47f74dc9bc"
+    account_sid = "account_number"
+    auth_token = "auth_token"
     @client = Twilio::REST::Client.new(account_sid, auth_token)
     message = @client.messages
       .create(
         body: "Thank you! Your order was placed and will be delivered before #{time_format}",
-        from: '+18599558642',
-        to: '+447472956139'
+        from: 'twilio_number',
+        to: 'your_number'
       )
     puts message.sid
   end

@@ -8,7 +8,7 @@ describe Order do
     expect(result).to eq menu
   end
 
-  it 'choose one item and return the list' do
+  it 'expecting fake_order to receive gets' do
     fake_order = double(:fake_menu, gets: "Feijoada")
     expect(fake_order).to receive(:gets).and_return("Feijoada")
     expect(fake_order).to receive(:gets).and_return("Mango Juice")
@@ -22,8 +22,8 @@ describe Order do
     time_format = (Time.now+1800).strftime("%k:%M")
     expect(fake_sms).to receive(:criate)
       .with(body: "Thank you! Your order was placed and will be delivered before #{time_format}",
-      from: '+18599558642',
-      to: '+447472956139')
+      from: '',
+      to: '')
     order = Order.new(fake_sms)
     order.send_sms
   end
